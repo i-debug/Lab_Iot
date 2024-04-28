@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+{#    <body>#}
+{#    <h1>Alert Settings</h1>#}
+{#    <form method="post" action="/alert/">#}
+{#        {% csrf_token %}#}
+{##}
+{#        <label for="temperature_threshold">Temperature Threshold:</label>#}
+{#        <input type="number" name="温度报警阈值" value="{{ temperature_threshold }}" required>#}
+{#        <br>#}
+{##}
+{#        <label for="hydrogen_threshold">Hydrogen Concentration Threshold:</label>#}
+{#        <input type="number" name="氢气浓度报警阈值" value="{{ hydrogen_threshold }}" required>#}
+{#        <br>#}
+{##}
+{#        <label for="smoke_threshold">Smoke Concentration Threshold:</label>#}
+{#        <input type="number" name="烟雾浓度报警阈值" value="{{ smoke_threshold }}" required>#}
+{#        <br>#}
+{##}
+{#        <label for="phone_number">Phone Number for Alerts:</label>#}
+{#        <input type="tel" name="接受提醒号码" value="{{ phone_number }}" required>#}
+{#        <br>#}
+{##}
+{#        <button type="submit">Save</button>#}
+{#    </form>#}
+{#    </body>#}
+
+    <body class="container">
+    <h1 class="text-center">Alert Settings</h1>
+    {% if saved_successfully %}
+        <div class="alert alert-success">
+            <strong>成功!</strong> 设置已保存
+        </div>
+    {% endif %}
+
+    <form method="post" action="/alert/" class="form-horizontal">
+        {% csrf_token %}
+
+
+        <div class="form-group">
+            <label for="temperature_threshold" class="col-sm-2 control-label">温度报警阈值:</label>
+            <div class="col-sm-10">
+                <input type="number" name="temperature_threshold" class="form-control"
+                       value="{{ temperature_threshold }}" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="hydrogen_threshold" class="col-sm-2 control-label">氢气浓度报警阈值:</label>
+            <div class="col-sm-10">
+                <input type="number" name="hydrogen_threshold" class="form-control" value="{{ hydrogen_threshold }}"
+                       required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="smoke_threshold" class="col-sm-2 control-label">烟雾浓度报警阈值:</label>
+            <div class="col-sm-10">
+                <input type="number" name="smoke_threshold" class="form-control" value="{{ smoke_threshold }}" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="phone_number" class="col-sm-2 control-label">提醒手机号:</label>
+            <div class="col-sm-10">
+                <input type="tel" name="phone_number" class="form-control" value="{{ phone_number }}" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </form>
+    </body>
+
+{% endblock %}

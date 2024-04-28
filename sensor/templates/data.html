@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">#}
+{#    <title>Sensor Data</title>#}
+{#    <!-- Add Bootstrap CDN link -->#}
+{#    <link rel="stylesheet" href="/plugins/bootstrap-3.4.1/css/bootstrap.min.css"#}
+{#        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wyq9R3S4GlxUvfofpbPV5u74WO5ptL4x2f"#}
+{#        crossorigin="anonymous">#}
+{#</head>#}
+<body>
+    <div class="container">
+        <h1 class="mt-5 mb-4">Sensor Data</h1>
+     <div style="margin-bottom: 10px">
+                <a class="btn btn-success" href="/data/">
+                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                    刷新
+                </a>
+            </div>
+        <table class="table table-bordered">
+            <thead >
+                <tr>
+                    <th>Temperature</th>
+                    <th>Humidity</th>
+                    <th>Hydrogen Concentration</th>
+                    <th>Smoke Concentration</th>
+                    <th>RSSI</th>
+                    <th>MAC Address</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in all_data %}
+                <tr>
+                    <td>{{ data.temperature }}</td>
+                    <td>{{ data.humidity }}</td>
+                    <td>{{ data.hydrogen_concentration }}</td>
+                    <td>{{ data.smoke_concentration }}</td>
+                    <td>{{ data.rssi }}</td>
+                    <td>{{ data.mac_address }}</td>
+                    <td>{{ data.timestamp }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!-- Add Bootstrap JS and Popper.js CDN links -->
+{#    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"#}
+{#        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"#}
+{#        crossorigin="anonymous"></script>#}
+{#    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"#}
+{#        integrity="sha384-Jqd/ZMoq8ihfu7Z9Bz+Zl+ejA3RcA+Jv+0F5qPDHCtNB/8PnUp9Ijsld9B5C5DH"#}
+{#        crossorigin="anonymous"></script>#}
+{#    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"#}
+{#        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wyq9R3S4GlxUvfofpbPV5u74WO5ptL4x2f"#}
+{#        crossorigin="anonymous"></script>#}
+</body>
+
+{% endblock %}

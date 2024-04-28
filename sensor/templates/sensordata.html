@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Sensor Dashboard</title>
+    <link rel="stylesheet" href="sensor/static/plugins/bootstrap-3.4.1/css/bootstrap.min.css">
+
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1>Sensor Dashboard</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">设备ID</th>
+                    <th scope="col">设备名称</th>
+                    <th scope="col">温度</th>
+                    <th scope="col">湿度</th>
+                    <th scope="col">人体检测</th>
+                    <th scope="col">氢气浓度</th>
+                    <th scope="col">火焰检测</th>
+                    <th scope="col">一氧化碳浓度</th>
+                    <th scope="col">烟雾浓度</th>
+                    <th scope="col">时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in page_obj %}
+                <tr>
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.device_mac }}</td>
+                    <td>{{ data.temperature }}°C</td>
+                    <td>{{ data.humidity }}%</td>
+                    <td>{{ data.human_detection }}</td>
+                    <td>{{ data.hydrogen }} ppm</td>
+                    <td>{{ data.fire }} ppm</td>
+                    <td>{{ data.co }} ppm</td>
+                    <td>{{ data.smoke }} ppm</td>
+                    <td>{{ data.timestamp }}</td>
+                </tr>
+                {% endfor %}
+
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a href="?page=1">&laquo; 第一页</a>
+                        <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+                    {% endif %}
+                    <form action="" method="get">
+                      <input type="text" name="page" placeholder="页码">
+                      <button type="submit">跳转</button>
+                    </form>
+                    <span class="current">
+                        页码 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}.
+                    </span>
+
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}">最后一页 &raquo;</a>
+                    {% endif %}
+                    </span>
+            </div>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="sensor/static/js/jquery-3.6.0.min.js"></script>
+    <script src="sensor/static/plugins/bootstrap-3.4.1/js/bootstrap.js"></script>
+</body>
+
+
+{% endblock %}

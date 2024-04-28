@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>RSSI Dashboard</title>
+    <link rel="stylesheet" href="sensor/static/plugins/bootstrap-3.4.1/css/bootstrap.min.css">
+
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1>RSSI Data Dashboard</h1>
+        <table class="table">
+            <thead >
+                <tr>
+                    <th scope="col">设备MAC地址</th>
+                    <th scope="col">接入点MAC地址</th>
+                    <th scope="col">RSSI值</th>
+                    <th scope="col">时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in page_obj %}
+                <tr>
+                    <td>{{ data.device_mac }}</td>
+                    <td>{{ data.ap_mac }}</td>
+                    <td>{{ data.rssi }}</td>
+                    <td>{{ data.timestamp | date:"Y-m-d H:i:s" }}</td>
+                </tr>
+                {% endfor %}
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a href="?page=1">&laquo; 第一页</a>
+                        <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+                    {% endif %}
+                    <form action="" method="get">
+                      <input type="text" name="page" placeholder="页码">
+                      <button type="submit">跳转</button>
+                    </form>
+                    <span class="current">
+                        页码 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}.
+                    </span>
+
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}">最后一页 &raquo;</a>
+                    {% endif %}
+                    </span>
+            </div>
+            </tbody>
+        </table>
+    </div>
+    <script src="sensor/static/js/jquery-3.6.0.min.js"></script>
+    <script src="sensor/static/plugins/bootstrap-3.4.1/js/bootstrap.js"></script>
+</body>
+
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能实验室</title>
+    <link rel="shortcut icon" href="/sensor/static/logo.ico">
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1/css/bootstrap.min.css' %}">
+{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">#}
+{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">#}
+
+    <style>
+        .navbar{
+            border-radius: 0;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+{#        <img src="/sensor/static/logo.png"/>#}
+      <a class="navbar-brand" href="/dashboard/">化学实验室安全系统</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+{#        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>#}
+            <li><a href="/brokerinfo/">系统信息</a></li>
+            <li><a href="/dashboard/">实时监控</a></li>
+            <li><a href="/sensordata/">Sensor数据中心</a></li>
+            <li><a href="/rssidata/">RSSI数据中心</a></li>
+
+        </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">登录</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">管理员 <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">个人资料</a></li>
+            <li><a href="#">我的信息</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">注销</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div>
+    {% block content %}{% endblock %}
+</div>
+
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-3.4.1/js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>
