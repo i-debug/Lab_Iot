@@ -19,7 +19,7 @@ Including another URLconf
 # urls.py
 
 from django.urls import path
-from sensor.views import sensor_data, rssi_data, layout
+from sensor.views import sensor_data, rssi_data, layout, admin, admin_add
 
 # appname = 'sensor'
 
@@ -27,6 +27,8 @@ urlpatterns = [
     path('sensordata/', sensor_data),
     path('rssidata/', rssi_data),
     path('layout/', layout),
+    path('admin/', admin),
+    path('admin/add/', admin_add),
 
     # path('mqtt_data_receiver/', mqtt_data_receiver),
 ]
