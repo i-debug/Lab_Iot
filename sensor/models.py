@@ -3,11 +3,8 @@ from django.db import models
 
 class Sensor_Data(models.Model):
     device_mac = models.CharField(max_length=17)  # MAC地址通常是17个字符
-    temperature = models.DecimalField(max_digits=5, decimal_places=2)
-    humidity = models.DecimalField(max_digits=5, decimal_places=2)
-    human_detection = models.IntegerField(default=0)
+    temperature = models.DecimalField(max_digits=5, decimal_places=2,null=False, default=0.0)
     hydrogen = models.IntegerField()  # 氢气浓度，使用整数表示
-    fire = models.IntegerField()  # 火焰检测值，使用整数表示
     co = models.IntegerField()  # 一氧化碳浓度，使用整数表示
     smoke = models.IntegerField()  # 烟雾浓度，使用整数表示
     timestamp = models.DateTimeField(auto_now_add=True)

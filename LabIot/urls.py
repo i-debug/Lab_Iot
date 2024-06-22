@@ -19,16 +19,59 @@ Including another URLconf
 # urls.py
 
 from django.urls import path
-from sensor.views import sensor_data, rssi_data, layout, admin, admin_add
+from sensor.views import (
+    sensor_data,
+    rssi_data,
+    layout,
+    admin_list,
+    admin_add,
+    admin_edit,
+    admin_delete,
+    admin_reset,
+    login,
+    logout,
+    image_code
+)
 
 # appname = 'sensor'
 
 urlpatterns = [
+    path('login/', login),
+    path('logout/', logout),
+    path('image/code/', image_code),
+
     path('sensordata/', sensor_data),
     path('rssidata/', rssi_data),
     path('layout/', layout),
-    path('admin/', admin),
-    path('admin/add/', admin_add),
 
-    # path('mqtt_data_receiver/', mqtt_data_receiver),
+    path('admin/list/', admin_list),
+    path('admin/add/', admin_add),
+    path('admin/<int:nid>/edit/', admin_edit),
+    path('admin/<int:nid>/delete/', admin_delete),
+    path('admin/<int:nid>/reset/', admin_reset),
+
+    # monitor
+    path('monitor/temp', login),
+    path('monitor/smoke', login),
+    path('monitor/hydrogen', login),
+    path('monitor/monoxide', login),
+    path('monitor/camera', login),
+
+    # data
+    path('data/temp', login),
+    path('data/smoke', login),
+    path('data/hydrogen', login),
+    path('data/monoxide', login),
+    path('data/camera', login),
+
+    # alert
+    path('alert/levelsetting', login),
+    path('alert/pushsetting', login),
+    path('alert/info', login),
+
+    # sysinfo
+    path('sysinfo/pod', login),
+    path('sysinfo/state', login)
+
+    # path('admin/delete/', admin_add),
 ]

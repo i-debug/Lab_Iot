@@ -13,7 +13,7 @@
 <body>
     <div class="container mt-5">
         <h1>Sensor Dashboard</h1>
-        <table class="table table-hover table-striped" >
+        <table class="table table-bordered table-striped" >
             <thead>
                 <tr>
                     <th scope="col">设备ID</th>
@@ -29,7 +29,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for data in page_obj %}
+                {% for data in items %}
                 <tr>
                     <td>{{ data.id }}</td>
                     <td>{{ data.device_mac }}</td>
@@ -44,28 +44,69 @@
                 </tr>
                 {% endfor %}
 
-            <div class="pagination">
-                <span class="step-links">
-                    {% if page_obj.has_previous %}
-                        <a href="?page=1" class="btn btn-default">&laquo; 第一页</a>
-                        <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-default">上一页</a>
-                    {% endif %}
-                    <form action="" method="get" style="display: inline;">
-                      <input type="text" name="page" placeholder="页码" class="form-control" style="width: auto; display: inline;">
-                      <button type="submit">跳转</button>
-                    </form>
-                    <span class="current">
-                        页码 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}.
-                    </span>
+{#            <div class="pagination">#}
+{#                <span class="step-links">#}
+{#                    {% if page_obj.has_previous %}#}
+{#                        <a href="?page=1" class="btn btn-default">&laquo; 第一页</a>#}
+{#                        <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-default">上一页</a>#}
+{#                    {% endif %}#}
+{#                    <form action="" method="get" style="display: inline;">#}
+{#                      <input type="text" name="page" placeholder="页码" class="form-control" style="width: auto; display: inline;">#}
+{#                      <button type="submit">跳转</button>#}
+{#                    </form>#}
+{#                    <span class="current">#}
+{#                        页码 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}.#}
+{#                    </span>#}
+{##}
+{#                    {% if page_obj.has_next %}#}
+{#                        <a href="?page={{ page_obj.next_page_number }}" class="btn btn-default">下一页</a>#}
+{#                        <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-default">最后一页 &raquo;</a>#}
+{#                    {% endif %}#}
+{#                    </span>#}
+{#            </div>#}
 
-                    {% if page_obj.has_next %}
-                        <a href="?page={{ page_obj.next_page_number }}" class="btn btn-default">下一页</a>
-                        <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-default">最后一页 &raquo;</a>
-                    {% endif %}
-                    </span>
-            </div>
             </tbody>
         </table>
+    {% if items.has_other_pages %}
+            <div class="pagination-container">
+                <ul class="pagination">
+
+                    <!-- 首页按钮 -->
+                    {% if not items.number == 1 %}
+                        <li><a href="?page=1">首页</a></li>
+                    {% else %}
+                        <li class="disabled"><span>首页</span></li>
+                    {% endif %}
+
+                    <!-- 上一页按钮 -->
+                    {% if items.has_previous %}
+                        <li><a href="?page={{ items.previous_page_number }}">&laquo; 上一页</a></li>
+                    {% else %}
+                        <li class="disabled"><span>&laquo; 上一页</span></li>
+                    {% endif %}
+
+                    <!-- 下一页按钮 -->
+                    {% if items.has_next %}
+                        <li><a href="?page={{ items.next_page_number }}">下一页 &raquo;</a></li>
+                    {% else %}
+                        <li class="disabled"><span>下一页 &raquo;</span></li>
+                    {% endif %}
+
+                    <!-- 末页按钮 -->
+                    {% if not items.number == items.paginator.num_pages %}
+                        <li><a href="?page={{ items.paginator.num_pages }}">末页</a></li>
+                    {% else %}
+                        <li class="disabled"><span>末页</span></li>
+                    {% endif %}
+
+                    <form action="" method="get">
+                        <input type="text" name="page" placeholder="跳转到页码" required>
+                        <button type="submit">跳转</button>
+                        第 {{ items.number }} 页，共 {{ items.paginator.num_pages }} 页
+                    </form>
+                </ul>
+            </div>
+        {% endif %}
     </div>
 
     <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
