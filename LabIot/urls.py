@@ -19,6 +19,8 @@ Including another URLconf
 # urls.py
 
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from sensor.views import (
     sensor_data,
     rssi_data,
@@ -30,9 +32,9 @@ from sensor.views import (
     admin_reset,
     login,
     logout,
-    image_code
+    image_code,
+    get_matching_data,
 )
-
 # appname = 'sensor'
 
 urlpatterns = [
@@ -51,7 +53,7 @@ urlpatterns = [
     path('admin/<int:nid>/reset/', admin_reset),
 
     # monitor
-    path('monitor/temp', login),
+    path('monitor/temp', get_matching_data),
     path('monitor/smoke', login),
     path('monitor/hydrogen', login),
     path('monitor/monoxide', login),
@@ -75,3 +77,5 @@ urlpatterns = [
 
     # path('admin/delete/', admin_add),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

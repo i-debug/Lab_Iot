@@ -5,5 +5,6 @@ from .layout import *
 from .admin import *
 from .admin_add import *
 from .account import *
+from .monitor import *
 
 

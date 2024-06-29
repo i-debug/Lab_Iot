@@ -19,10 +19,7 @@
                     <th scope="col">设备ID</th>
                     <th scope="col">设备名称</th>
                     <th scope="col">温度</th>
-                    <th scope="col">湿度</th>
-                    <th scope="col">人体检测</th>
                     <th scope="col">氢气浓度</th>
-                    <th scope="col">火焰检测</th>
                     <th scope="col">一氧化碳浓度</th>
                     <th scope="col">烟雾浓度</th>
                     <th scope="col">时间</th>
@@ -34,10 +31,7 @@
                     <td>{{ data.id }}</td>
                     <td>{{ data.device_mac }}</td>
                     <td>{{ data.temperature }}°C</td>
-                    <td>{{ data.humidity }}%</td>
-                    <td>{{ data.human_detection }}</td>
                     <td>{{ data.hydrogen }} ppm</td>
-                    <td>{{ data.fire }} ppm</td>
                     <td>{{ data.co }} ppm</td>
                     <td>{{ data.smoke }} ppm</td>
                     <td>{{ data.timestamp | date:"Y-m-d H:i:s" }}</td>
