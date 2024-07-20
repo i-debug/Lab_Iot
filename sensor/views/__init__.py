@@ -5,6 +5,8 @@ from .layout import *
 from .admin import *
 from .admin_add import *
 from .account import *
-from .monitor import *
+from .heatmap import *
+from .sysinfo import *
+from rest_framework.response import Response
 
 

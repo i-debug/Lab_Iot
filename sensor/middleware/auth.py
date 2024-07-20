@@ -1,8 +1,9 @@
-from django.utils.deprecation import (MiddlewareMixin)
-from django.shortcuts import HttpResponse, redirect
-
-
+# from django.utils.deprecation import MiddlewareMixin
+# from django.shortcuts import HttpResponse, redirect
+#
+#
 # class AuthMiddleware(MiddlewareMixin):
+#
 #
 #     def process_request(self, request):
 #         if request.path_info == '/login/':
@@ -22,7 +23,21 @@ class AuthMiddleware(MiddlewareMixin):
         # 定义一个需要登录的路径列表
         protected_paths = [
             # '/admin/',  # 示例路径
-            '/dashboard/',  # 示例路径
+            # 'logout/',
+            '/sensordata/',
+            '/rssidata/',
+            '/layout/',
+            '/admin/list/',
+            '/admin/add/',
+            '/admin/<int:nid>/edit/'
+            '/admin/<int:nid>/delete/',
+            '/admin/<int:nid>/reset/',
+            '/monitor/temp/',
+            # '/monitor/temp/generate/',
+            '/monitor/smoke/',
+            '/monitor/hydrogen/',
+            '/monitor/co/',
+            '/sysinfo/state/'
         ]
 
         # 如果请求路径在保护路径列表中，则进行登录检查

@@ -6,8 +6,6 @@
     <title>智能实验室</title>
     <link rel="shortcut icon" href="{% static 'img/logo.ico' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    {#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">#}
-    {#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">#}
 
     <style>
         .navbar {
@@ -36,21 +34,26 @@
             <ul class="nav navbar-nav">
                 {#        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>#}
                 <li><a href="/admin/list/">管理员账户</a></li>
+                <li><a href="/sysinfo/state/">系统状态</a></li>
                 <li><a href="/sensordata/">Sensor数据中心</a></li>
                 <li><a href="/rssidata/">RSSI数据中心</a></li>
-                <li><a href="/monitor/temp">监视器</a></li>
+                <li><a href="/monitor/temp/">温度</a></li>
+                <li><a href="/monitor/smoke/">烟雾浓度</a></li>
+                <li><a href="/monitor/hydrogen/">氢气浓度</a></li>
+                <li><a href="/monitor/co/">一氧化碳</a></li>
+
+
 
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
 
-                <li><a href="/login/">登录</a></li>
+{#                <li><a href="/login/">登录</a></li>#}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">{{ request.session.info.name }} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">个人资料</a></li>
-                        <li><a href="#">我的信息</a></li>
+                        <li><a href="/admin/list/">个人资料</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="/logout/">注销</a></li>
                     </ul>

@@ -5,7 +5,7 @@ import paho.mqtt.client as mqtt
 import atexit
 
 
-MQTT_BROKER_HOST = "39.105.165.150"
+MQTT_BROKER_HOST = "127.0.0.1"
 MQTT_BROKER_PORT = 1883
 SENSOR_TOPIC = "sensor"
 RSSI_TOPIC = "rssi"

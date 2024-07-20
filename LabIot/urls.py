@@ -33,11 +33,18 @@ from sensor.views import (
     login,
     logout,
     image_code,
-    get_matching_data,
+    get_heatmap_json,
+    get_heatmap_img,
+    get_sysinfo,
+    get_smokemap_img,
+    get_hydrogenmap_img,
+    get_comap_img
+
 )
 # appname = 'sensor'
 
 urlpatterns = [
+    path('', login),
     path('login/', login),
     path('logout/', logout),
     path('image/code/', image_code),
@@ -53,29 +60,15 @@ urlpatterns = [
     path('admin/<int:nid>/reset/', admin_reset),
 
     # monitor
-    path('monitor/temp', get_matching_data),
-    path('monitor/smoke', login),
-    path('monitor/hydrogen', login),
-    path('monitor/monoxide', login),
-    path('monitor/camera', login),
-
-    # data
-    path('data/temp', login),
-    path('data/smoke', login),
-    path('data/hydrogen', login),
-    path('data/monoxide', login),
-    path('data/camera', login),
-
-    # alert
-    path('alert/levelsetting', login),
-    path('alert/pushsetting', login),
-    path('alert/info', login),
+    path('monitor/temp/', get_heatmap_img),
+    path('monitor/temp/generate/', get_heatmap_json),
+    path('monitor/smoke/', get_smokemap_img),
+    path('monitor/hydrogen/', get_hydrogenmap_img),
+    path('monitor/co/', get_comap_img),
 
     # sysinfo
-    path('sysinfo/pod', login),
-    path('sysinfo/state', login)
+    path('sysinfo/state/', get_sysinfo)
 
-    # path('admin/delete/', admin_add),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
