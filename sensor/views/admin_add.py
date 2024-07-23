@@ -56,6 +56,7 @@ class AdminEditModelForm(BootStrapModelForm):
         #     'password': forms.PasswordInput(render_value=True)
         # }
 
+
 class AdminResetModelForm(BootStrapModelForm):
 
     confirm_password = forms.CharField(
@@ -63,6 +64,7 @@ class AdminResetModelForm(BootStrapModelForm):
         label='确认密码',
         widget=forms.PasswordInput(render_value=True)
     )
+
     class Meta:
         model = Admin
         fields = ["password", "confirm_password"]
@@ -73,7 +75,7 @@ class AdminResetModelForm(BootStrapModelForm):
     def clean_password(self):
         password = self.cleaned_data.get('password')
         md5_pwd = md5(password)
-        exists = Admin.objects.filter(id=self.instance.pk,password=md5_pwd).exists()
+        exists = Admin.objects.filter(id=self.instance.pk, password=md5_pwd).exists()
         if exists:
             raise forms.ValidationError('新密码不能与旧密码相同')
         return md5_pwd
@@ -131,6 +133,7 @@ def admin_edit(request, nid):
 def admin_delete(request, nid):
     Admin.objects.filter(id=nid).delete()
     return redirect('/admin/list/')
+
 
 def admin_reset(request,nid):
     row_object = Admin.objects.filter(id=nid).first()

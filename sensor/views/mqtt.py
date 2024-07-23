@@ -5,8 +5,8 @@ import paho.mqtt.client as mqtt
 import atexit
 
 
-MQTT_BROKER_HOST = "127.0.0.1"
-MQTT_BROKER_PORT = 1883
+MQTT_BROKER_HOST = "192.168.1.58"
+MQTT_BROKER_PORT = 31111
 SENSOR_TOPIC = "sensor"
 RSSI_TOPIC = "rssi"
 
@@ -40,17 +40,14 @@ def on_message(client, userdata, message):
         )
 
 
-# Set up MQTT client
 mqtt_client = mqtt.Client()
 mqtt_client.on_connect = on_connect
 mqtt_client.on_message = on_message
 mqtt_client.connect(MQTT_BROKER_HOST, MQTT_BROKER_PORT, 60)
-# Start MQTT loop in a separate thread
 mqtt_client.loop_start()
 
 
 @csrf_exempt
-# Close MQTT connection on application shutdown
 def on_shutdown():
     mqtt_client.loop_stop()
 

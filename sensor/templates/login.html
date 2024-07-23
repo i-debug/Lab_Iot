@@ -7,27 +7,50 @@
     <title>Login Form</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <style>
-        .account{
+        .account {
             width: 400px;
             border: 1px solid #dddddd;
             border-radius: 5px;
             box-shadow: 5px 5px 20px #aaa;
-
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 100px;
+            margin: 100px auto;
             padding: 20px 40px;
         }
 
-        .account h2{
-            margin-top: 10px;
+        .account h1 {
+            font-size: 24px;
             text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .account h2 {
+            font-size: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group span {
+            color: red;
+            font-size: 12px;
+        }
+
+        .btn-primary {
+            width: 100%;
         }
     </style>
 </head>
 
 <body>
     <div class="account">
+        <h1>化学实验室安全系统</h1>
         <h2>用户登录</h2>
         <form method="post" novalidate>
             {% csrf_token %}
@@ -35,30 +58,16 @@
             <div class="form-group">
                 <label>用户名</label>
                 {{form.username}}
-                <span{{ form.username.errors.0 }}></span>
+                <span>{{ form.username.errors.0 }}</span>
             </div>
 
             <div class="form-group">
                 <label>密码</label>
                 {{form.password}}
-                {{form.password.errors.0}}
-            </div>
-
-            <div class="form-group">
-                <label for="id_code">图片验证码</label>
-                <div class="row">
-                    <div class="col-xs-7">
-                        {{ form.code }}
-                        {{ form.code.errors.0 }}
-                    </div>
-                    <div class="col-xs-5">
-                        <img id="image_code" src="/image/code/" style="width: 125px">
-                    </div>
-                </div>
+                <span>{{ form.password.errors.0 }}</span>
             </div>
 
             <input type="submit" value="登录" class="btn btn-primary">
-
         </form>
     </div>
 </body>

@@ -19,11 +19,11 @@ class LoginForm(forms.Form):
         required=True,
     )
 
-    code = forms.CharField(
-        label="验证码",
-        widget=forms.TextInput,
-        required=True,
-    )
+    # code = forms.CharField(
+    #     label="验证码",
+    #     widget=forms.TextInput,
+    #     required=True,
+    # )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -46,13 +46,13 @@ def login(request):
 
     form = LoginForm(data=request.POST)
     if form.is_valid():
-        user_input_code = form.cleaned_data.pop('code')
-        code = request.session.get('image_code', "")
-        if code.upper() != user_input_code.upper():
-            form.add_error("code", "验证码错误")
-            return render(request, 'login.html', {"form": form})
+        # user_input_code = form.cleaned_data.pop('code')
+        # code = request.session.get('image_code', "")
+        # if code.upper() != user_input_code.upper():
+        #     form.add_error("code", "验证码错误")
+        #     return render(request, 'login.html', {"form": form})
 
-        # 超级用户admin/123456
+        # 超级用户admin
         if form.cleaned_data.get('username') == 'admin':
             request.session["info"] = {'id': 1, 'name': 'admin'}
             # session save 7 days
@@ -85,5 +85,4 @@ def image_code(request):
 
     stream = BytesIO()
     img.save(stream, 'png')
-    # stream.getvalue()
     return HttpResponse(stream.getvalue())

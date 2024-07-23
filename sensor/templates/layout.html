@@ -17,7 +17,6 @@
 
 <nav class="navbar navbar-default">
     <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -29,10 +28,8 @@
             <a class="navbar-brand" href="/sensordata/">化学实验室安全系统</a>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                {#        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>#}
                 <li><a href="/admin/list/">管理员账户</a></li>
                 <li><a href="/sysinfo/state/">系统状态</a></li>
                 <li><a href="/sensordata/">Sensor数据中心</a></li>
@@ -48,7 +45,6 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
 
-{#                <li><a href="/login/">登录</a></li>#}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">{{ request.session.info.name }} <span class="caret"></span></a>
@@ -59,8 +55,8 @@
                     </ul>
                 </li>
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+    </div>
 </nav>
 
 <div>
@@ -69,7 +65,9 @@
 
 <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
-{% block js %}{% endblock %}
+{% block js %}
+
+{% endblock %}
 
 </body>
 </html>

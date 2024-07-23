@@ -1,22 +1,19 @@
+import threading
+import time
+import matplotlib
+import matplotlib.pyplot as plt
+import os
+import numpy as np
 from collections import defaultdict
-from django.http import JsonResponse, FileResponse, HttpResponseNotFound
+from django.http import JsonResponse,  HttpResponseNotFound
 from sensor.models import RSSI_Data, Sensor_Data
 from django.conf import settings
-from django.views.decorators.csrf import csrf_exempt
-import numpy as np
 from sensor.views.itu_indoor_path_loss import itu_indoor_path_loss_inverse
 from sklearn.manifold import MDS
 from scipy.interpolate import griddata
-import matplotlib.pyplot as plt
-import os
 from rest_framework.decorators import api_view
 from django.shortcuts import render
-import threading
-import time
-import requests
-import json
-import subprocess
-import cv2
+matplotlib.use('Agg')
 
 
 # 根据mac从数据库中读取temp
@@ -349,17 +346,16 @@ def generate_heatmap(combined_array, datatype):
     filename = "default_heatmap.png"
 
     if datatype == "add_temp":
-        imglabel = "温度(°C)"
+        imglabel = "temp(°C)"
         filename = "heatmap.png"
-        print("生成温度热力图")
     elif datatype == 'add_smoke':
-        imglabel = "烟雾浓度"
+        imglabel = "smoke concentration"
         filename = "smokemap.png"
     elif datatype == 'add_hydrogen':
-        imglabel = "氢气浓度"
+        imglabel = "Hydrogen concentration"
         filename = "hydrogenmap.png"
     elif datatype == 'add_co':
-        imglabel = "一氧化碳浓度"
+        imglabel = "carbon monoxide concentration"
         filename = "comap.png"
     else:
         print("无效的datatype")
@@ -426,7 +422,7 @@ def generate_heatmap(combined_array, datatype):
     print(f"Saving map to {os.path.join(img_dir, filename)}")
 
     plt.savefig(os.path.join(img_dir, filename))
-    plt.show()
+    # plt.show()
     plt.close()  # 关闭图形以释放内存
 
 
@@ -611,65 +607,3 @@ def get_comap_img(request):
         return render(request, 'monitorco.html', {'img_url': img_url})
     else:
         return HttpResponseNotFound('Image not found')
-
-# def img_rtsp():
-#     frame_width = 800
-#     frame_height = 600
-#     frame_rate = 15
-#     delay = 1 / frame_rate  # 计算帧间延迟
-#
-#     # 定义 FFmpeg 命令
-#     ffmpeg_command = [
-#         'ffmpeg',
-#         '-re',  # 以实时速度读入
-#         '-f', 'rawvideo',  # 输入格式为原始视频数据
-#         '-pix_fmt', 'bgr24',  # 输入像素格式
-#         '-s', f'{frame_width}x{frame_height}',  # 输入视频尺寸
-#         '-r', str(frame_rate),  # 输入帧率
-#         '-i', '-',  # 从标准输入读入
-#         '-c:v', 'libx264',  # 使用H.264编码器
-#         '-f', 'rtsp',  # 输出格式为RTSP
-#         'rtsp://localhost:8554/mystream'  # RTSP服务器地址
-#     ]
-#
-#     # 启动 FFmpeg 进程
-#     ffmpeg_process = subprocess.Popen(ffmpeg_command, stdin=subprocess.PIPE)
-#
-#     # 指定图片文件夹路径
-#     image_folder = 'img/'
-#
-#     try:
-#         while True:
-#             # 获取最新的图像文件
-#             images = [f for f in sorted(os.listdir(image_folder)) if f.endswith('heatmap_nolabel.png')]
-#             if not images:
-#                 print("No image files found. Waiting for images...")
-#                 time.sleep(1)
-#                 continue
-#
-#             for filename in images:
-#                 # 读取图片
-#                 image_path = os.path.join(image_folder, filename)
-#                 frame = cv2.imread(image_path)
-#
-#                 # 检查图像尺寸是否一致
-#                 if frame.shape[1] != frame_width or frame.shape[0] != frame_height:
-#                     print(f"Image {filename} has incorrect dimensions. Expected {frame_width}x{frame_height}, got {frame.shape[1]}x{frame.shape[0]}")
-#                     continue
-#
-#                 # 将帧写入 FFmpeg 进程的标准输入
-#                 ffmpeg_process.stdin.write(frame.tobytes())
-#
-#                 # 控制帧率
-#                 time.sleep(delay)
-#
-#     except KeyboardInterrupt:
-#         # 捕获 Ctrl+C 终止进程
-#         ffmpeg_process.stdin.close()
-#         ffmpeg_process.wait()
-#     except Exception as e:
-#         print(f"An error occurred: {e}")
-#         ffmpeg_process.stdin.close()
-#         ffmpeg_process.wait()
-#
-# img_rtsp()

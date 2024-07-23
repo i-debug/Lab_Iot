@@ -5,8 +5,6 @@ from sensor.utils import paginate_items
 
 def admin_list(request):
 
-    # info_dict = request.session["info"]
-
     # search
     data_dict = {}
     search_data = request.GET.get('q', "")

@@ -44,7 +44,7 @@ def get_sysinfo(request):
         # 转换时间到本地时区并格式化
         local_start_time = start_time.astimezone(local_tz)
         local_end_time = end_time.astimezone(local_tz)
-        labels.append(f'{local_start_time.strftime("%H:%M")}-{local_end_time.strftime("%H:%M")}')
+        labels.append(f'{local_start_time.strftime("%m/%d:%H:%M")}-{local_end_time.strftime("%m/%d:%H:%M")}')
 
         start_time = end_time
 

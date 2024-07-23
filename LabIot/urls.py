@@ -15,16 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-
 # urls.py
-
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from sensor.views import (
     sensor_data,
     rssi_data,
-    layout,
     admin_list,
     admin_add,
     admin_edit,
@@ -47,11 +44,9 @@ urlpatterns = [
     path('', login),
     path('login/', login),
     path('logout/', logout),
-    path('image/code/', image_code),
 
     path('sensordata/', sensor_data),
     path('rssidata/', rssi_data),
-    path('layout/', layout),
 
     path('admin/list/', admin_list),
     path('admin/add/', admin_add),

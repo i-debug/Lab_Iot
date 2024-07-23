@@ -6,7 +6,6 @@
         <div class="col-md-8 col-md-offset-2 text-center">
             <h1>实验室实时一氧化碳浓度监测热图</h1>
             <div id="heatmap-container">
-                <!-- 使用模板变量设置图片URL -->
                 <img id="heatmap-img" alt="热图图片" class="img-responsive" src="{{ img_url }}" style="display:none; margin: 0 auto;">
             </div>
             <button class="btn btn-primary" onclick="window.location.reload();">刷新页面</button>
@@ -15,7 +14,6 @@
 </div>
 
 <script>
-    // 在页面加载完成后显示图片
     window.onload = function() {
         const imgElement = document.getElementById('heatmap-img');
         if (imgElement.src) {
@@ -23,12 +21,10 @@
         }
     };
 
-    // 刷新热图函数
     function refreshHeatmap() {
         const imgElement = document.getElementById('heatmap-img');
         if (imgElement) {
             const currentSrc = imgElement.src;
-            // 为了强制浏览器刷新图片，添加一个时间戳参数
             imgElement.src = currentSrc.split('?')[0] + '?t=' + new Date().getTime();
         }
     }
